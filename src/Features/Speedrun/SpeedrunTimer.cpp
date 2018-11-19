@@ -112,9 +112,10 @@ void SpeedrunTimer::Update(const int* engineTicks, const char* engineMap)
 void SpeedrunTimer::CheckRules(const int* engineTicks)
 {
     auto action = TimerAction::DoNothing;
-    TimerRule* source;
+    TimerRule* source = nullptr;
 
-    for (auto& rule : this->rules) {
+    for (auto& rule : this->rules)
+    {
         if (!rule->madeAction) {
             action = rule->Dispatch();
             if (action != TimerAction::DoNothing) {
@@ -123,6 +124,9 @@ void SpeedrunTimer::CheckRules(const int* engineTicks)
             }
         }
     }
+
+    if (source == nullptr)
+        return;
 
     switch (action) {
     case TimerAction::Split:
