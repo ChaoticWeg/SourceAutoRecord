@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <algorithm>
 
 #include "Modules/Console.hpp"
 #include "Modules/Engine.hpp"
@@ -170,8 +171,8 @@ CON_COMMAND(sar_list_ents, "Lists entities.\n")
     auto pages = Offsets::NUM_ENT_ENTRIES / 512;
 
     auto page = (args.ArgC() == 2) ? std::atoi(args[1]) : 1;
-    page = std::max(page, 1);
-    page = std::min(page, pages);
+    page = (std::max)(page, 1);
+    page = (std::min)(page, pages);
 
     auto first = (page - 1) * 512;
     auto last = page * 512;
